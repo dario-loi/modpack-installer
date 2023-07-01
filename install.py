@@ -345,12 +345,15 @@ def main(zipfile, user_mcdir=None, manual=False, open_browser=False, automated=F
 
     # Copy overrides
     print("Copying overrides")
-    for subdir in os.listdir(packdata_dir + '/overrides'):
-        print(subdir + "...")
-        if os.path.isdir(packdata_dir + '/overrides/' + subdir):
-            copy_tree(packdata_dir + '/overrides/' + subdir, mc_dir + '/' + subdir)
-        else:
-            shutil.copyfile(packdata_dir + '/overrides/' + subdir, mc_dir + '/' + subdir)
+    
+    # check if overrides exists
+    if os.path.isdir(packdata_dir + '/overrides'):
+        for subdir in os.listdir(packdata_dir + '/overrides'):
+            print(subdir + "...")
+            if os.path.isdir(packdata_dir + '/overrides/' + subdir):
+                copy_tree(packdata_dir + '/overrides/' + subdir, mc_dir + '/' + subdir)
+            else:
+                shutil.copyfile(packdata_dir + '/overrides/' + subdir, mc_dir + '/' + subdir)
     print("Done!")
     print()
     print()
